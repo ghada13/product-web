@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Produits</title>
+    <link rel="stylesheet" href="/webjars/bootstrap/5.3.3/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container p-3">
+    <div class="card">
+        <div class="card-header"> List of Products </div>
+        <div class="card-body">
+            <form th:action="@{index}" method="get">
+                <label >Keyword:</label>
+                <input type="text" name="keyword">
+                <button type="submit" class="btn btn-info">Search</button>
+            </form>
+            <table class="table">
+                <tr>
+                    <th>ID</th>
+                    <th>Des</th>
+                    <th>Prix</th>
+                    <th>Quantite</th>
+                    <th>Disponibilité</th>
+                    <th>date de creation</th>
+                </tr>
+                <tr th:each="p:${produits}">
+                    <td th:text="${p.reference}"></td>
+                    <td th:text="${p.designation}"></td>
+                    <td th:text="${p.prix}"></td>
+                    <td th:text="${p.quantite}"></td>
+                    <td th:text="${p.disponible}"></td>
+                    <td th:text="${p.dateCreation}"></td>
+
+                </tr>
+            </table>
+            <ul class="nav nav-pills">
+                <li th:each="page,status:${pages}">
+                    <a th:href="@{/index(page=${status.index})}" class="btn btn-outline-info" th:text="${status.index}"></a>
+                </li>
+            </ul>
+
+        </div>
+    </div>
+</div>
+</body>
+</html>
